@@ -7,18 +7,22 @@ namespace HotelListing.Api.Controllers
     [ApiController]
     public class HotelsController : ControllerBase
     {
+        //Static Hotel lists
         private static List<Hotels> hotels = new List<Hotels>
         {
             new Hotels { Id = 1, Name = "Hotel A", Address = "123 Main St", Rating = 4.5 },
             new Hotels { Id = 2, Name = "Hotel B", Address = "456 Elm St", Rating = 3.8 },
             new Hotels { Id = 3, Name = "Hotel C", Address = "789 Oak St", Rating = 4.2 }
         };
+
+        // GET: api/<HotelsController>
         [HttpGet]
         public ActionResult<IEnumerable<Hotels>> Get()
         {
             return Ok(hotels);
         }
 
+        // GET api/<HotelsController>/5
         [HttpGet("{id}")]
         public ActionResult<Hotels> Get(int id)
         {
@@ -42,6 +46,7 @@ namespace HotelListing.Api.Controllers
             return CreatedAtAction(nameof(Get), new { id = newHotel.Id }, newHotel);
         }
 
+        // PUT api/<HotelsController>/5
         [HttpPut("{id}")]
         public ActionResult<Hotels> Put(int id,[FromBody] Hotels updatedHotel)
         {
@@ -57,6 +62,7 @@ namespace HotelListing.Api.Controllers
             return NoContent();
         }
 
+        // DELETE api/<HotelsController>/5
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
